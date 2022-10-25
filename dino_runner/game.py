@@ -71,3 +71,15 @@ class Game:
         self.power_up_manager.draw(self.screen)
         pygame.display.update()
         pygame.display.flip()
+
+    def draw_background(self):
+        pass
+    def draw_score(self):
+        pass
+    def draw_power_up_time(self):
+        pass
+    def handle_events_on_menu(self):
+        pass
+    def show_menu(self):
+        pygame.display.flip()
+        self.handle_events_on_menu()
