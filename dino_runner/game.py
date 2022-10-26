@@ -73,7 +73,10 @@ class Game:
         pygame.display.flip()
 
     def draw_background(self):
-        pass
+        image_width = BG.get.width()
+        self.screen.blit(BG, (self.x_pos_bg, self.y_pos_bg))
+        self.screen.blit(BG, (image_width + self.x_pos_bg, self.y_pos_bg))
+        
     def draw_score(self):
         pass
     def draw_power_up_time(self):
