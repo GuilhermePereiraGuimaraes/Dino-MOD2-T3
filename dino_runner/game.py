@@ -1,3 +1,4 @@
+# from asyncio import events
 import pygame
 from dino_runner.utils.constants import BG,ICON,SCREEN_HEIGHT,SCREEN_WIDTH,TITLE,FPS,DEFAULT_TYPE
 from dino_runner.components.dinosaur import Dinosaur
@@ -76,13 +77,56 @@ class Game:
         image_width = BG.get.width()
         self.screen.blit(BG, (self.x_pos_bg, self.y_pos_bg))
         self.screen.blit(BG, (image_width + self.x_pos_bg, self.y_pos_bg))
-        
+        if self.x_pos_bg <= -image_width:
+            self.screen.blit(BG, (image_width + self.x_pos_bg, self.y_pos_bg))
+            self.x_pos_bg = 0
+            self.x_pos_bg -= self.game_speed
+
     def draw_score(self):
-        pass
+        draw_message_component(
+            f"Score: {self.score}",
+            self.screen,
+            pos_x_center=1000,
+            pos_y_center=50,
+        )
     def draw_power_up_time(self):
-        pass
+        if self.player.has_power_up:
+            time_to_show = round((self.player.power_up_time - pygame.time.get_ticks())/1000,2)
+            if time_to_show >= 0:
+                draw_message_component(
+                    f"{self.player.type.captalize()} enable for {time_to_show} seconds",
+                    self.screen,
+                    pos_x_center=1000,
+                    pos_y_center=50,
+                )
+            else:
+                self.player.has_power_up = False
+                self.player.type = DEFAULT_TYPE
+
     def handle_events_on_menu(self):
-        pass
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.playing = False
+                self.running = False
+            elif events.type == pygame.KEYDOWN:
+                self.run
+
     def show_menu(self):
+        self.screen.fill((255, 255, 255))
+        half_screen_height = SCREEN_HEIGHT // 2
+        half_screen_width = SCREEN_WIDTH // 2
+
+        if self.death_count == 0:
+            draw_message_component("Pressione qualquer tecla para iniciar", self.screen)
+        else:
+            draw_message_component("Pressione qualquer tecla para reiniciar", self.screen, pos_y_center=half_screen_height)
+            draw_message_component(
+                f"Your Score: {self.score}",
+                self.screen,
+                pos_y_center=half_screen_height - 100,
+            )
+            self.screen.blit(ICON, ())
+
         pygame.display.flip()
+
         self.handle_events_on_menu()
