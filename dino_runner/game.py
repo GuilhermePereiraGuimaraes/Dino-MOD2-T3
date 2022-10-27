@@ -108,7 +108,7 @@ class Game:
             if event.type == pygame.QUIT:
                 self.playing = False
                 self.running = False
-            elif events.type == pygame.KEYDOWN:
+            elif event.type == pygame.KEYDOWN:
                 self.run
 
     def show_menu(self):
