@@ -27,9 +27,9 @@ class ObstacleManager:
                 else:
                     self.obstacles.remove(obstacle)
     
-    def reset_obstacle(self):
+    def reset_obstacles(self):
         self.obstacles = []
     
     def draw(self, screen):
         for obstacle in self.obstacles:
-            obstacle.draw[screen]
+            obstacle.draw(screen)
