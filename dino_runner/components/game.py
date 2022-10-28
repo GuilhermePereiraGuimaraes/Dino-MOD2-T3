@@ -125,7 +125,7 @@ class Game:
                 self.screen,
                 pos_y_center=half_screen_height - 100,
             )
-            self.screen.blit(ICON, ())
+            self.screen.blit(ICON, (half_screen_width - 40, half_screen_height - 30))
 
         pygame.display.flip()
 
